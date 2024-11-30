@@ -2,9 +2,9 @@ FROM node:22.11.0-alpine3.20 AS development
 
 WORKDIR /usr/src/app
 
-COPY package*.json pnpm-lock.yaml ./
-
 RUN npm install -g pnpm
+
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
@@ -29,4 +29,4 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/billing/main"]
+CMD ["node", "dist/apps/auth/main"]
